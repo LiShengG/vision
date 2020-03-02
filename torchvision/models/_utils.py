@@ -5,7 +5,7 @@ from torch import nn
 from torch.jit.annotations import Dict
 
 
-class IntermediateLayerGetter(nn.ModuleDict):
+class IntermediateLayerGetter(nn.ModuleDict):   # 显示网络中间层
     """
     Module wrapper that returns intermediate layers from a model
 
@@ -37,10 +37,11 @@ class IntermediateLayerGetter(nn.ModuleDict):
         >>>      ('feat2', torch.Size([1, 256, 14, 14]))]
     """
     _version = 2
-    __annotations__ = {
+     # annotation-注释
+    __annotations_ = {
         "return_layers": Dict[str, str],
     }
-
+    
     def __init__(self, model, return_layers):
         if not set(return_layers).issubset([name for name, _ in model.named_children()]):
             raise ValueError("return_layers are not present in model")
